@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit contact</title>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-4">
+            <h2 class="my-2">Edit contact</h2>
+            <form th:action="@{/contact/update}" id="contact-form" method="post">
+                <div class="modal-body">
+                    <input type="number" name="id" th:value="${aContact.id}" hidden>
+                    <label for="first_name">First name</label>
+                    <input class="form-control" id="first_name" required type="text" name="first_name"
+                           th:value="${aContact.first_name}">
+                    <label for="last_name">Last name</label>
+                    <input class="form-control" id="last_name" required type="text" name="last_name"
+                           th:value="${aContact.last_name}">
+                    <label for="phone" class="mt-3">Phone</label>
+                    <input class="form-control" name="phone" id="phone" required type="text"
+                           th:value="${aContact.phone}">
+                    <label for="email" class="mt-3">Email</label>
+                    <input class="form-control" name="email" id="email" required type="email"
+                           th:value="${aContact.email}">
+                    <button type="submit" class="btn btn-success mt-3" id="btn-save-contact"><i class="fa fa-save"></i>
+                        Update Contact
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

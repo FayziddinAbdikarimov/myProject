@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cabinet Page</title>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 offset-4">
+            <h2 th:text="${title}"></h2>
+        </div>
+
+        <div class="col-md-12">
+            <a href="/addModal" class="btn btn-primary mb-2">Add Contact</a>
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="bg-success">
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                    <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody class="bg-light">
+                <tr th:each="contact: ${contacts}">
+                     <td th:text="${contact.id}"></td>
+                    <td th:text="${contact.first_name}"></td>
+                    <td th:text="${contact.last_name}"></td>
+                    <td th:text="${contact.phone}"></td>
+                    <td th:text="${contact.email}"></td>
+                    <td><img style="width: 100px; height: 100px;" th:src="@{/contact/ilova/{id}(id=${contact.attachment_id})}"> </td>
+                    <td>
+                        <a th:href="@{/contact/edit/{id}(id=${contact.id})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/contact/delete/{id}(id=${contact.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

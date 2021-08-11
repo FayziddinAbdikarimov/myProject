@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add contact</title>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-4">
+            <h2 class="my-2">Add contact</h2>
+            <form th:action="@{/contact/add}" id="contact-form" method="post">
+                <div class="modal-body">
+                    <input type="number" id="attachment_id" name="attachment_id" hidden>
+                    <label for="first_name">First name</label>
+                    <input class="form-control" id="first_name" required type="text" name="first_name"
+                           placeholder="Enter  first name">
+                    <label for="last_name">Last name</label>
+                    <input class="form-control" id="last_name" required type="text" name="last_name"
+                           placeholder="Enter  last name">
+                    <label for="phone" class="mt-3">Phone</label>
+                    <input class="form-control" name="phone" id="phone" required type="text"
+                           placeholder="Enter your phone">
+                    <label for="email" class="mt-3">Email</label>
+                    <input class="form-control" name="email" id="email" required type="email"
+                           placeholder="Enter your email">
+                    <button type="submit" class="btn btn-success mt-3" id="btn-save-contact"><i class="fa fa-save"></i>
+                        Save Contact
+                    </button>
+                </div>
+            </form>
+            <form id="fileUpload">
+                <label for="ilova">Ilova</label>
+                <input type="file" class="form-control" id="ilova" name="file" onchange="fileSave()">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script >
+
+<script type="text/javascript">
+    function fileSave(){
+        $.ajax(
+            {
+                url: '/contact/ilova',
+                method: 'POST',
+                data: new FormData($('#fileUpload')[0]),
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (file_id){
+                    $('#attachment_id').val(file_id);
+                }
+            }
+        )
+    }
+</script>
+</html>
